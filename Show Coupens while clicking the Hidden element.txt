@@ -1,0 +1,36 @@
+import React, { useState } from 'react';
+
+function Coupons() {
+const [coupons,setCoupons] = useState([
+{id: 1, title: 'Coupon 1'},
+{id: 2, title: 'Coupon 2'},
+]);
+const [buttonVisible, setButtonVisible] = useState(true);
+const handleClick = () => {
+setCoupons((prevCoupons) => {
+const [coupon1, coupon2] = prevCoupons;
+return [coupon2, coupon1];});
+
+    setButtonVisible(false);
+  };
+
+const renderCoupons = () => {
+return coupons.map((coupon) => {
+return (<div key={coupon.id} className="coupon">
+{coupon.title}
+</div>
+);
+});};
+
+const renderButton = () => {
+if (buttonVisible) {
+return (
+<button onClick={handleClick}>Swap Coupons</button>
+);
+}return null;
+ };
+return (
+<div><div className="coupons">{renderCoupons()}
+      </div>{renderButton()}
+    </div>);}
+export default Coupons;
